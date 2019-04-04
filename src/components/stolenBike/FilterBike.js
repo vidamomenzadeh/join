@@ -1,42 +1,52 @@
 import React  from 'react';
-import PropTypes from 'prop-types';
+import { Input, DatePicker, Button, Form } from 'antd';
 
-function StolenBikeItem(props) {
-     const {bike} = props;
-     const imageSrc = bike.media.image_url ? bike.media.image_url : "/public/img/bike.svg";
+function BikeFilter(props) {
+    const {applyStolenBikeFilter} = props;
+    const { getFieldDecorator, validateFields } = props.form;
 
-     return(
-       <div className="bike-item" id={`bike-item-${bike.id}`}>
-           
-           <img className={`${bike.media.image_url ? "hasSrc" : "noImage"}`} src={imageSrc} />
-           <div className={"bike-content"}>
-               <div className={"bike-title"}>{bike.title}</div>
-               <div>
-                   <label>
-                       Description:
-                   </label>
-                   {bike.description}
-               </div>
-               <div>
-                   <label>
-                       Location:
-                   </label>
-                   {bike.address}
-               </div>
-               <div>
-                   <label>
-                       Stolen:
-                   </label>
-                   {bike.occurred_at}
-               </div>
-           </div>
+    function handleSubmit(e){
+        e.preventDefault();
+        validateFields((err, values) => {
+            if (!err) {
+                applyStolenBikeFilter(values);
+            }
+        });
+    }
 
-        </div>
+    return(
+
+        <Form onSubmit={handleSubmit} className="bike-filter-form" layout="inline">
+            <Form.Item>
+            {getFieldDecorator('title', {
+               rules: [{ required: true, message: 'Please input your username!' }],
+            })(
+               <Input placeholder="Search Case Description..." />
+            )}
+            </Form.Item>
+
+            <Form.Item>
+               {getFieldDecorator('occurred_before', {
+               })(
+                   <DatePicker  placeholder={"From"}/>
+               )}
+            </Form.Item>
+
+           <Form.Item>
+               {getFieldDecorator('occurred_after', {
+               })(
+                   <DatePicker  placeholder={"To"}/>
+               )}
+           </Form.Item>
+
+            <Form.Item>
+                <Button type="primary" htmlType="submit" className="login-form-button">
+                    Find Cases
+                </Button>
+            </Form.Item>
+
+        </Form>
     );
 }
 
-StolenBikeItem.propTypes = {
-    bike : PropTypes.object
-}
-
-export default StolenBikeItem;
+export const  WrappedBikeFilterForm = Form.create({ name: 'bike_filter' })(BikeFilter);

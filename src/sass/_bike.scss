@@ -1,0 +1,50 @@
+.app{
+  width: 80%;
+  margin: 0px auto;
+  .bike-filter-form{
+    margin: 15px 0px;
+  }
+  .search-title-page{
+    font-size: 32px;
+    margin: 40px;
+    text-align: center;
+    div.search-sub-title{
+      font-size: 18px;
+      margin: 15px;
+    }
+  }
+
+  .bike-item:nth-child(odd){
+    background-color: #f2f2f2;
+  }
+  .bike-item{
+
+    margin: 10px 0px;
+    clear: both;
+    border: 1px solid #ddd;
+    height: 160px;
+    overflow: hidden;
+    clear: both;
+    .bike-content{
+      padding: 10px;
+      float: left;
+      width: calc(100% - 210px);
+    }
+    .bike-title{
+      color: #3498db;
+    }
+    img.noImage{
+      width: 182px;
+      float: left;
+      min-height: 100%;
+      height: calc(100% - 48px);
+      padding: 0px 24px;
+      box-sizing: border-box;
+    }
+    img.hasSrc{
+      width: 182px;
+      float: left;
+      min-height: 100%;
+    }
+  }
+}
