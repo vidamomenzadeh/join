@@ -18,8 +18,7 @@ function BikeFilter(props) {
 
         <Form onSubmit={handleSubmit} className="bike-filter-form" layout="inline">
             <Form.Item>
-            {getFieldDecorator('title', {
-               rules: [{ required: true, message: 'Please input your username!' }],
+            {getFieldDecorator('query', {
             })(
                <Input placeholder="Search Case Description..." />
             )}

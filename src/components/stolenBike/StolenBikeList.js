@@ -1,9 +1,10 @@
 import StolenBikeItem from '@components/stolenBike/StolenBikeItem';
 import React from 'react';
+import {Pagination} from "antd";
 import PropTypes from 'prop-types';
 
 export default function StolenBikeList(props){
-    const {bikes} = props;
+    const {bikes, fetchBikesOnPage, total, currentPage} = props;
 
     return (
         <div className="bikes-list-wrapper">
@@ -13,6 +14,9 @@ export default function StolenBikeList(props){
                     key={id}
                     bike={bikes[id]}/>;
             })}
+            <Pagination defaultCurrent={currentPage} total={total} onChange={(page)=>{
+                fetchBikesOnPage(page);
+            }}/>
         </div>
     );
 }

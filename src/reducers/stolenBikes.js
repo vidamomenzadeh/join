@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
 import * as TYPES from '@actions/types';
 let initialState = {
-    listBikes  : {}
+    listBikes  : {},
+    totalPage  : 0
 }
 
 
@@ -10,8 +11,7 @@ export const stolenBikes = (state = initialState.listBikes, action)=> {
         case  TYPES.FETCHED_STOLEN_BIKES:
 
             return {
-                ...state,
-                ...action.payload.incidents.reduce((obj, app) => {
+                ...action.payload.bikes.incidents.reduce((obj, app) => {
                     obj[app.id] = app;
                     return obj;
                 }, {})
@@ -22,11 +22,30 @@ export const stolenBikes = (state = initialState.listBikes, action)=> {
     }
 };
 
+export const stolenBikesTotalPage = (state = initialState.totalPage, action)=> {
+    switch (action.type) {
+        case  TYPES.FETCHED_STOLEN_BIKES:
+
+            return action.payload.total
+
+
+        default:
+            return state;
+    }
+};
+
+
+export const getTotalBikes = (state) => {
+    return  state ? state.stolenBikes.stolenBikesTotalPage : 0;
+}
+
+
 export const getStolenBikes = (state) => {
     return  state ? state.stolenBikes.stolenBikes : {};
 };
 
 
 export default combineReducers({
-    stolenBikes: stolenBikes
+    stolenBikes,
+    stolenBikesTotalPage
 });

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {getStolenBikesData} from '../actions/stolenBike';
 import {withRouter} from "react-router";
 import LayoutCmp from '@components/LayoutCmp';
-import {getStolenBikes} from "@reducers/stolenBikes";
+import {getStolenBikes, getTotalBikes} from "@reducers/stolenBikes";
 import StolenBikeList from "@components/stolenBike/StolenBikeList";
 import {WrappedBikeFilterForm} from "@components/stolenBike/FilterBike";
 
@@ -12,8 +12,15 @@ class StolenBikePageContainer extends Component {
 
     constructor(props){
         super(props);
+        this.state = {
+            filter : {
+                page : 1,
+                per_page:10
+            }
+        };
 
         this.applyStolenBikeFilter = this.applyStolenBikeFilter.bind(this);
+        this.fetchBikesOnPage = this.fetchBikesOnPage.bind(this);
     }
 
     componentDidMount() {
@@ -24,11 +31,20 @@ class StolenBikePageContainer extends Component {
     * Apply Bike Search Filtered
     * */
     applyStolenBikeFilter(filter){
+        this.setState({
+            filter : filter
+        });
         this.props.getStolenBikesData(filter);
     }
 
+    fetchBikesOnPage(page){
+        this.setState({filter : {...this.state.filter, ...{page:page}}},()=>{
+            this.props.getStolenBikesData(this.state.filter);
+        });
+    }
+
     render() {
-        const {bikes} = this.props;
+        const {bikes, total} = this.props;
 
         return(
             <LayoutCmp  showFooter={true}
@@ -39,7 +55,10 @@ class StolenBikePageContainer extends Component {
                         <div className={"search-sub-title"}>Stolen bykes</div>
                     </div>
                     <WrappedBikeFilterForm applyStolenBikeFilter={this.applyStolenBikeFilter}/>
-                    <StolenBikeList bikes={bikes}  />
+                    <StolenBikeList bikes={bikes}
+                                    total={total}
+                                    currentPage={this.state.filter.page}
+                                    fetchBikesOnPage={this.fetchBikesOnPage} />
                 </div>
             </LayoutCmp>
         )
@@ -48,7 +67,8 @@ class StolenBikePageContainer extends Component {
 
 function mapStateToProps(state) {
     return {
-        bikes : getStolenBikes(state)
+        bikes : getStolenBikes(state),
+        total : getTotalBikes(state)
     }
 }
 
