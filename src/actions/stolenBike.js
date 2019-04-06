@@ -20,11 +20,15 @@ let fetchBikesFn = (params) => {
 }
 
 export const getStolenBikesData = (params) => dispatch => {
+    dispatch({
+        type: TYPES.FETCHED_LOADING_STOLEN_BIKES,
+    });
     return(
         fetchBikesFn(params).then((response) => {
             response.json().then(function(data) {
+
                 dispatch({
-                    type: TYPES.FETCHED_STOLEN_BIKES,
+                    type: TYPES.FETCHED_SUCCESS_STOLEN_BIKES,
                     payload: {
                         bikes : data,
                         total : parseInt(response.headers.get("total"))

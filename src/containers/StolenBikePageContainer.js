@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {getStolenBikesData} from '../actions/stolenBike';
 import {withRouter} from "react-router";
 import LayoutCmp from '@components/LayoutCmp';
-import {getStolenBikes, getTotalBikes} from "@reducers/stolenBikes";
+import {getStolenBikes, getTotalBikes, getIsloading} from "@reducers/stolenBikes";
 import StolenBikeList from "@components/stolenBike/StolenBikeList";
 import {WrappedBikeFilterForm} from "@components/stolenBike/FilterBike";
 
@@ -44,7 +44,7 @@ class StolenBikePageContainer extends Component {
     }
 
     render() {
-        const {bikes, total} = this.props;
+        const {bikes, total, loading } = this.props;
 
         return(
             <LayoutCmp  showFooter={true}
@@ -55,10 +55,12 @@ class StolenBikePageContainer extends Component {
                         <div className={"search-sub-title"}>Stolen bykes</div>
                     </div>
                     <WrappedBikeFilterForm applyStolenBikeFilter={this.applyStolenBikeFilter}/>
-                    <StolenBikeList bikes={bikes}
-                                    total={total}
-                                    currentPage={this.state.filter.page}
-                                    fetchBikesOnPage={this.fetchBikesOnPage} />
+                    {loading ? <div>Loading...</div>
+                            : <StolenBikeList bikes={bikes}
+                                        total={total}
+                                        currentPage={this.state.filter.page}
+                                        fetchBikesOnPage={this.fetchBikesOnPage}/>
+                    }
                 </div>
             </LayoutCmp>
         )
@@ -68,7 +70,8 @@ class StolenBikePageContainer extends Component {
 function mapStateToProps(state) {
     return {
         bikes : getStolenBikes(state),
-        total : getTotalBikes(state)
+        total : getTotalBikes(state),
+        loading : getIsloading(state)
     }
 }
 
