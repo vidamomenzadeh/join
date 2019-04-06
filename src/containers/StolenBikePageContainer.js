@@ -56,10 +56,12 @@ class StolenBikePageContainer extends Component {
                     </div>
                     <WrappedBikeFilterForm applyStolenBikeFilter={this.applyStolenBikeFilter}/>
                     {loading ? <div>Loading...</div>
-                            : <StolenBikeList bikes={bikes}
-                                        total={total}
-                                        currentPage={this.state.filter.page}
-                                        fetchBikesOnPage={this.fetchBikesOnPage}/>
+                             : total == 0 ? <div>No Results...</div>
+                                          :
+                                            <StolenBikeList bikes={bikes}
+                                            total={total}
+                                            currentPage={this.state.filter.page}
+                                            fetchBikesOnPage={this.fetchBikesOnPage}/>
                     }
                 </div>
             </LayoutCmp>
