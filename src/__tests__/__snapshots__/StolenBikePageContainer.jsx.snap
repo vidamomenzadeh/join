@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot test Container renders correctly 1`] = `
+<Route>
+  <Component />
+</Route>
+`;
+
+exports[`Snapshot test Container should render correctly with markers 1`] = `
+<Route>
+  <Component />
+</Route>
+`;

@@ -1,5 +1,6 @@
 import React  from 'react';
 import PropTypes from 'prop-types';
+import {FORMAT_DATE} from "../../util";
 
 function StolenBikeItem(props) {
      const {bike} = props;
@@ -25,9 +26,15 @@ function StolenBikeItem(props) {
                </div>
                <div>
                    <label>
-                       Stolen:
+                       Date of the theft:
                    </label>
-                   {bike.occurred_at}
+                   {FORMAT_DATE(bike.occurred_at)}
+               </div>
+               <div>
+                   <label>
+                       Date of the Report:
+                   </label>
+                   {FORMAT_DATE(bike.updated_at)}
                </div>
            </div>
 

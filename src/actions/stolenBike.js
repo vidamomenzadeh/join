@@ -4,10 +4,12 @@ import {object} from "prop-types";
 
 let fetchBikesFn = (params) => {
     let url = URL + "incidents?";
-    params = params || {
-        page : 1,
+    params = params || {};
+    params = {...params,...{
+        incident_type:"theft",
+        proximity:"berlin",
         per_page : 10
-    };
+    }};
 
     Object.keys(params).map((item)=>{
         if(params[item])

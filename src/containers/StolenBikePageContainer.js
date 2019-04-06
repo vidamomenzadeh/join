@@ -14,8 +14,7 @@ class StolenBikePageContainer extends Component {
         super(props);
         this.state = {
             filter : {
-                page : 1,
-                per_page:10
+                page : 1
             }
         };
 
@@ -55,13 +54,17 @@ class StolenBikePageContainer extends Component {
                         <div className={"search-sub-title"}>Stolen bykes</div>
                     </div>
                     <WrappedBikeFilterForm applyStolenBikeFilter={this.applyStolenBikeFilter}/>
+
                     {loading ? <div>Loading...</div>
                              : total == 0 ? <div>No Results...</div>
-                                          :
+                                          :(<React.Fragment>
+                                                <div className={"show-total-count"}>Total {total}</div>
                                             <StolenBikeList bikes={bikes}
                                             total={total}
                                             currentPage={this.state.filter.page}
                                             fetchBikesOnPage={this.fetchBikesOnPage}/>
+                                           </React.Fragment>)
+
                     }
                 </div>
             </LayoutCmp>
