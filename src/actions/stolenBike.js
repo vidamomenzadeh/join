@@ -1,6 +1,5 @@
 import {URL} from '@constants/config';
 import * as TYPES from '@actions/types';
-import {object} from "prop-types";
 
 let fetchBikesFn = (params) => {
     let url = URL + "incidents?";
@@ -33,7 +32,7 @@ export const getStolenBikesData = (params) => dispatch => {
     });
     return(
         fetchBikesFn(params).then((response) => {
-            response.json().then(function(data) {
+            return (response.json().then(function(data) {
                 dispatch({
                     type: TYPES.FETCHED_SUCCESS_STOLEN_BIKES,
                     payload: {
@@ -41,7 +40,7 @@ export const getStolenBikesData = (params) => dispatch => {
                         total : parseInt(response.headers.get("total"))
                     }
                 });
-             });
+             }));
         })
     )
 }
