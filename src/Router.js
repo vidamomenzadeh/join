@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import { Route, Switch } from 'react-router-dom';
-import MarkerPageContainer from './containers/StolenBikePageContainer';
+import StolenBikePageContainer from './containers/StolenBikePageContainer';
 
 
 
@@ -11,7 +11,7 @@ const Root = ({store, history}) => {
         <Router history={history}>
             <Fragment>
                 <Switch>
-                    <Route exact path='/' component={MarkerPageContainer} />
+                    <Route exact path='/' component={StolenBikePageContainer} />
                 </Switch>
             </Fragment>
         </Router>
