@@ -18,7 +18,13 @@ let fetchBikesFn = (params) => {
 
     return fetch(url, {
         method: 'GET',
-    }).then((response) => response)
+    })
+    .catch((error) => dispatch({
+        type: TYPES.FETCHED_ERROR_STOLEN_BIKES,
+        payload :{
+            error : error
+        }
+    }))
 }
 
 export const getStolenBikesData = (params) => dispatch => {
@@ -28,7 +34,6 @@ export const getStolenBikesData = (params) => dispatch => {
     return(
         fetchBikesFn(params).then((response) => {
             response.json().then(function(data) {
-
                 dispatch({
                     type: TYPES.FETCHED_SUCCESS_STOLEN_BIKES,
                     payload: {
@@ -36,7 +41,7 @@ export const getStolenBikesData = (params) => dispatch => {
                         total : parseInt(response.headers.get("total"))
                     }
                 });
-            });
+             });
         })
     )
 }

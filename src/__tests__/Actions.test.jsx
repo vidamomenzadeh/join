@@ -17,20 +17,26 @@ describe('--Actions Test--', () => {
     });
 
     it('--Action Test--FETCHED_Bikes--', () => {
-        fetchMock.getOnce(URL + "incidents?", {
-            body: SAMPLE_RESP_2
-        });
+        const response = {
+            status: 200,
+            body: JSON.stringify(SAMPLE_RESP_2),
+            headers: {"total": "1"}
+        };
+        const options = {"method": "GET"};
 
-        const expectedActions = [
-            {
-                type: TYPES.FETCHED_LOADING_STOLEN_BIKES,
+        fetchMock.getOnce(URL + "incidents?incident_type=theft&proximity=berlin&per_page=10&", response, options);
+        const expectedActions = [{
+                type: TYPES.FETCHED_LOADING_STOLEN_BIKES
+            },{
+                type: TYPES.FETCHED_SUCCESS_STOLEN_BIKES,
                 payload: {
-                    markers : SAMPLE_RESP
+                    bikes : SAMPLE_RESP_2,
+                    total : 1
                 }
             }
         ];
-        const store = mockStore({});
 
+        const store = mockStore({});
         return store.dispatch(actions.getStolenBikesData()).then(() => {
             expect(store.getActions()).toEqual(expectedActions)
         })

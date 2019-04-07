@@ -12,8 +12,8 @@ export const stolenBikes = (state = initialState.listBikes, action)=> {
         case  TYPES.FETCHED_SUCCESS_STOLEN_BIKES:
 
             return {
-                ...action.payload.bikes.incidents.reduce((obj, app) => {
-                    obj[app.id] = app;
+                ...action.payload.bikes.incidents.reduce((obj, bike) => {
+                    obj[bike.id] = bike;
                     return obj;
                 }, {})
             }
@@ -47,6 +47,17 @@ export const stolenBikesTotalPage = (state = initialState.totalPage, action)=> {
 };
 
 
+export const stolenBikesErrors = (state = null, action)=> {
+    switch (action.type) {
+        case  TYPES.FETCHED_ERROR_STOLEN_BIKES:
+            return action.payload.error;
+
+        default:
+            return state;
+    }
+};
+
+
 export const getTotalBikes = (state) => {
     return  state ? state.stolenBikes.stolenBikesTotalPage : 0;
 }
@@ -60,9 +71,14 @@ export const getStolenBikes = (state) => {
     return  state ? state.stolenBikes.stolenBikes : {};
 };
 
+export const getErrors = (state) => {
+    return  state ? state.stolenBikes.stolenBikesErrors : {};
+};
+
 
 export default combineReducers({
     stolenBikes,
     stolenBikesTotalPage,
-    stolenBikesLoading
+    stolenBikesLoading,
+    stolenBikesErrors
 });

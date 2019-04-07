@@ -5,7 +5,6 @@ import { Route, Switch } from 'react-router-dom';
 import StolenBikePageContainer from './containers/StolenBikePageContainer';
 
 
-
 const Root = ({store, history}) => {
     return <Provider store={store}>
         <Router history={history}>

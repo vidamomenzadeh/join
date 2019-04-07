@@ -1,4 +1,4 @@
-export const SAMPLE_RESP = {"1" :{
+export const SAMPLE_RESP = {
     "id": "1",
     "title": "Stolen Bike",
     "description": "Stolen Bike des.",
@@ -18,7 +18,7 @@ export const SAMPLE_RESP = {"1" :{
     "location_description": null,
     "type": "Theft",
     "type_properties": null
-}};
+};
 
 export const SAMPLE_RESP_2 = {"incidents":[{
         "id": "1",

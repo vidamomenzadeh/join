@@ -4,12 +4,12 @@ import {FORMAT_DATE} from "../../util";
 
 function StolenBikeItem(props) {
      const {bike} = props;
-     const imageSrc = bike.media.image_url ? bike.media.image_url : "/public/img/bike.svg";
+     const imageSrc = bike.media && bike.media.image_url ? bike.media.image_url : "/public/img/bike.svg";
 
      return(
        <div className="bike-item" id={`bike-item-${bike.id}`}>
 
-           <img className={`${bike.media.image_url ? "hasSrc" : "noImage"}`} src={imageSrc} />
+           <img className={`${bike.media && bike.media.image_url ? "hasSrc" : "noImage"}`} src={imageSrc} />
            <div className={"bike-content"}>
                <div className={"bike-title"}>{bike.title}</div>
                <div>

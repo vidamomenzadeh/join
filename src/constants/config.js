@@ -1,3 +1,3 @@
-export const URL = "http://bikewise.org:443/api/v2/";
+export const URL = "https://bikewise.org:443/api/v2/";
 
 
