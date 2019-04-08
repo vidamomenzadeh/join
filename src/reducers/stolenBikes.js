@@ -28,7 +28,9 @@ export const stolenBikesLoading = (state = initialState.loading, action)=> {
         case  TYPES.FETCHED_LOADING_STOLEN_BIKES:
             return true;
         case  TYPES.FETCHED_SUCCESS_STOLEN_BIKES:
+        case  TYPES.FETCHED_ERROR_STOLEN_BIKES:
             return false;
+
 
         default:
             return state;
@@ -40,7 +42,8 @@ export const stolenBikesTotalPage = (state = initialState.totalPage, action)=> {
     switch (action.type) {
         case  TYPES.FETCHED_SUCCESS_STOLEN_BIKES:
             return action.payload.total;
-
+        case  TYPES.FETCHED_ERROR_STOLEN_BIKES:
+            return -1;
         default:
             return state;
     }

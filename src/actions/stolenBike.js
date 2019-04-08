@@ -1,7 +1,7 @@
 import {URL} from '@constants/config';
 import * as TYPES from '@actions/types';
 
-let fetchBikesFn = (params) => {
+let fetchBikesFn = (params) =>{
     let url = URL + "incidents?";
     params = params || {};
     params = {...params,...{
@@ -16,14 +16,9 @@ let fetchBikesFn = (params) => {
     });
 
     return fetch(url, {
-        method: 'GET',
+        method: 'GET'
     })
-    .catch((error) => dispatch({
-        type: TYPES.FETCHED_ERROR_STOLEN_BIKES,
-        payload :{
-            error : error
-        }
-    }))
+
 }
 
 export const getStolenBikesData = (params) => dispatch => {
@@ -41,6 +36,11 @@ export const getStolenBikesData = (params) => dispatch => {
                     }
                 });
              }));
-        })
+        }).catch((error) => dispatch({
+            type: TYPES.FETCHED_ERROR_STOLEN_BIKES,
+            payload :{
+                error : error
+            }
+        }))
     )
 }

@@ -13,7 +13,7 @@ describe('Snapshot test Container', () => {
         expect(mapWrapper).toMatchSnapshot();
     });
 
-    it('should render correctly with markers', () => {
+    it('should render correctly with bikes', () => {
         const bikes = SAMPLE_RESP;
 
         const mapWrapper = shallow(<StolenBikePageContainer bikes={bikes} />);

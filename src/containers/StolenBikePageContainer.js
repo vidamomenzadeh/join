@@ -54,7 +54,7 @@ class StolenBikePageContainer extends Component {
                         <div className={"search-sub-title"}>Stolen bykes</div>
                     </div>
                     <WrappedBikeFilterForm applyStolenBikeFilter={this.applyStolenBikeFilter}/>
-                    {errors && <div>Something went wrong...</div>}
+                    {errors && <div className={"has-error"}>Something went wrong...</div>}
                     {loading ? <div>Loading...</div>
                              : total == 0 ? <div>No Results...</div>
                                           :(<React.Fragment>
